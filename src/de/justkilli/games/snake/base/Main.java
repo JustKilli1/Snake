@@ -1,8 +1,10 @@
 package de.justkilli.games.snake.base;
 
 import de.justkilli.games.snake.game.Design;
-import de.justkilli.games.snake.game.gamefield.BaseField;
+import de.justkilli.games.snake.game.gamefield.FieldPosition;
 import de.justkilli.games.snake.game.gamefield.FieldSize;
+import de.justkilli.games.snake.game.gamefield.GameField;
+import de.justkilli.games.snake.game.snake.Snake;
 
 import java.awt.*;
 
@@ -10,8 +12,10 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
         Design design = new Design();
-        design.setFieldBackground(new Color(0, 100, 0));
-        BaseField baseField = new BaseField(new FieldSize(Toolkit.getDefaultToolkit().getScreenSize(), 20), design);
+        design.setFieldBackground(new Color(0, 100, 0))
+                .setSnakeColor(new Color(0, 20, 200))
+                .setFoodColor(new Color(100, 100, 0));
+/*        BaseField baseField = new BaseField(new FieldSize(Toolkit.getDefaultToolkit().getScreenSize(), 20), design);
         baseField.setVisible(true);
         new Thread(new Runnable() {
             @Override
@@ -27,6 +31,9 @@ public class Main {
                 }
 
             }
-        }).run();
+        }).run();*/
+        GameField gameField = new GameField(new FieldSize(Toolkit.getDefaultToolkit().getScreenSize(), 20), design, new Snake());
+        gameField.setVisible(true);
+        gameField.spawnFood(new FieldPosition(10, 22));
     }
 }

@@ -10,9 +10,9 @@ import java.awt.*;
  * */
 public class BaseField extends JFrame {
 
-    private final FieldSize fieldSize;
-    private Design design;
-    private JPanel[][] fieldParts;
+    protected final FieldSize fieldSize;
+    protected Design design;
+    protected JPanel[][] fieldParts;
 
 
     public BaseField(FieldSize fieldSize, Design design) {
@@ -26,10 +26,9 @@ public class BaseField extends JFrame {
      * Sets some initial Window Values
      * */
     private void windowInit() {
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(fieldSize.getDimension());
-        GridLayout gridLayout = new GridLayout(fieldSize.getRows(), fieldSize.getColumns());
-        this.setLayout(gridLayout);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(fieldSize.getDimension());
+        setLayout(new GridLayout(fieldSize.getRows(), fieldSize.getColumns()));
     }
 
     /**
@@ -59,8 +58,15 @@ public class BaseField extends JFrame {
      * @param column The Column where the JPanel is located
      * @param newColor The New Color of the targeted JPanel
      * */
-    public void changePartColor(int row, int column, Color newColor) {
-        fieldParts[row][column].setBackground(newColor);
+    protected void changePartColor(FieldPosition fieldPosition, Color newColor) {
+        fieldParts[fieldPosition.getRow()][fieldPosition.getColumn()].setBackground(newColor);
+    }
+
+    /**
+     * Resets the BaseField to its Origin State
+     * */
+    protected void reset() {
+        build();
     }
 
 }
